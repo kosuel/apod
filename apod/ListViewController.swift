@@ -11,6 +11,7 @@ class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! // show when fetching...
+    @IBOutlet weak var appendButton: UIButton! // append custom date button
     
     var isFetching = true {
         didSet{
@@ -26,12 +27,13 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
         
         nextButton.fill(background: .white, text: .label)
+//        appendButton.setImage(UIImage.init(named: "plus.circle"), for: .normal)
         
         activityIndicator.isHidden = true
 
         // start fetch data
         let today = Date().start.addDays(-1)
-        let oneWeekBefore = today.addDays(-8)
+        let oneWeekBefore = today.addDays(-5)
 
         isFetching = true
         Apod.fetchApods(from: oneWeekBefore, to: today) { [weak self] apods in
@@ -108,13 +110,72 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
+
+extension ListViewController: DatePickerViewControllerDelegate{
+    func dateSelected(from vc: UIViewController, on date: Date) {
+
+        // if there is a photo on the date, just return
+        guard apods.contains(where:{ $0.date.isSameDate(to: date) }) == false else {
+            
+            let alert = UIAlertController(title: NSLocalizedString("Photo already exists on date", comment: ""), message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+            
+            present(alert, animated: true)
+            
+            return
+        }
+        
+        Apod.fetchApod(of: date) { [weak self] apod in
+            guard let self = self,
+            let apod = apod else { return }
+            
+            var apods = self.apods
+            apods.append(apod)
+            
+            apods.sort { $0.date < $1.date }
+            
+            self.apods = apods
+            
+            self.tableView.reloadData()
+        }
+    }
+}
+
 // MARK: - Button actions
 extension ListViewController {
     
-    @IBAction func nextAction(_ sender: Any) {
-    }
-    
     @IBAction func unwindAction(unwindSegue: UIStoryboardSegue){
         // do nothing
+    }
+    
+    @IBAction func appendUserDateAction(_ sender: UIButton) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DatePicker") as! DatePickerViewController
+        vc.delegate = self
+        
+        // good reference about UIPopoverPresentationController
+        //
+        // http://www.thomashanning.com/uipopoverpresentationcontroller/
+        vc.modalPresentationStyle = .popover;
+        
+        let popoverPresentationController = vc.popoverPresentationController!;
+        popoverPresentationController.delegate = self
+        popoverPresentationController.sourceRect = sender.frame;
+        popoverPresentationController.sourceView = self.view;
+        popoverPresentationController.permittedArrowDirections = [.down, .up];
+
+        present(vc, animated: true)
+    }
+}
+
+    
+extension ListViewController: UIPopoverPresentationControllerDelegate{
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        adaptivePresentationStyle(for: controller)
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        // iPhone에서도 popover를 보여준다.
+        .none
     }
 }

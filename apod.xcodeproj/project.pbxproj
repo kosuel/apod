@@ -16,6 +16,7 @@
 		245FE74C28516BEE00DA6F1D /* apodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245FE74B28516BEE00DA6F1D /* apodTests.swift */; };
 		245FE75628516BEE00DA6F1D /* apodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245FE75528516BEE00DA6F1D /* apodUITests.swift */; };
 		245FE75828516BEE00DA6F1D /* apodUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245FE75728516BEE00DA6F1D /* apodUITestsLaunchTests.swift */; };
+		24EEDBF92852B00C0009B732 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEDBF82852B00C0009B732 /* DatePickerViewController.swift */; };
 		24F78F9728516F5700B75160 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F78F9628516F5700B75160 /* Extensions.swift */; };
 		24F78F992851725500B75160 /* Apod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F78F982851725500B75160 /* Apod.swift */; };
 		24F78F9B2851A80100B75160 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F78F9A2851A80100B75160 /* SelectionViewController.swift */; };
@@ -56,6 +57,7 @@
 		245FE75128516BEE00DA6F1D /* apodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = apodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		245FE75528516BEE00DA6F1D /* apodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apodUITests.swift; sourceTree = "<group>"; };
 		245FE75728516BEE00DA6F1D /* apodUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apodUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		24EEDBF82852B00C0009B732 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		24F78F9628516F5700B75160 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		24F78F982851725500B75160 /* Apod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apod.swift; sourceTree = "<group>"; };
 		24F78F9A2851A80100B75160 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				245FE73628516BEB00DA6F1D /* SceneDelegate.swift */,
 				245FE73828516BEB00DA6F1D /* ListViewController.swift */,
 				24F78F9A2851A80100B75160 /* SelectionViewController.swift */,
+				24EEDBF82852B00C0009B732 /* DatePickerViewController.swift */,
 				245FE73A28516BEB00DA6F1D /* Main.storyboard */,
 				245FE73D28516BEE00DA6F1D /* Assets.xcassets */,
 				245FE73F28516BEE00DA6F1D /* LaunchScreen.storyboard */,
@@ -386,6 +389,7 @@
 				24F78F9B2851A80100B75160 /* SelectionViewController.swift in Sources */,
 				245FE73528516BEB00DA6F1D /* AppDelegate.swift in Sources */,
 				24F78F992851725500B75160 /* Apod.swift in Sources */,
+				24EEDBF92852B00C0009B732 /* DatePickerViewController.swift in Sources */,
 				245FE73728516BEB00DA6F1D /* SceneDelegate.swift in Sources */,
 				24F78F9D2851AD0400B75160 /* DecorationViews.swift in Sources */,
 				24F78F9728516F5700B75160 /* Extensions.swift in Sources */,
