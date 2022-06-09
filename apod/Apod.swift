@@ -23,7 +23,7 @@ struct Apod{
     let title: String
     let url: URL
     
-   
+    var isSelected = false // for user selection
 }
 
 // fetch apod from network
@@ -38,6 +38,8 @@ extension Apod {
         "https://api.nasa.gov/planetary/apod"
     }
     
+    // completion hander will run on main thread
+    //
     static func fetchApod(of date:Date, completion: @escaping (Apod?) -> ()) {
         var urlComponents = URLComponents(string: baseUrl)!
         
@@ -48,12 +50,14 @@ extension Apod {
         
         URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
             
-            guard let data = data else {
-                completion(nil)
-                return
+            DispatchQueue.main.async {
+                guard let data = data else {
+                    completion(nil)
+                    return
+                }
+                          
+                completion( try? JSONDecoder().decode(Apod.self, from: data) )
             }
-                      
-            completion( try? JSONDecoder().decode(Apod.self, from: data) )
         }
         .resume()
     }
@@ -71,12 +75,14 @@ extension Apod {
 
         URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
             
-            guard let data = data else {
-                completion(nil)
-                return
+            DispatchQueue.main.async {
+                guard let data = data else {
+                    completion(nil)
+                    return
+                }
+                          
+                completion( try? JSONDecoder().decode([Apod].self, from: data) )
             }
-                      
-            completion( try? JSONDecoder().decode([Apod].self, from: data) )
         }
         .resume()
     }
