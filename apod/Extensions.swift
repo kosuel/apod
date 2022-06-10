@@ -15,12 +15,13 @@ enum ApiKeys{
 extension UIColor {
     static var cellColors: [UIColor] {
         [
-            UIColor(rgb: 0x1a237e),
-            UIColor(rgb: 0x283593),
-            UIColor(rgb: 0x303f9f),
-            UIColor(rgb: 0x3949ab),
-            UIColor(rgb: 0x3f51b5),
-            UIColor(rgb: 0x5c6bc0)
+            UIColor(rgb: 0xd50000),
+            UIColor(rgb: 0xaa00ff),
+            UIColor(rgb: 0x304ffe),
+            UIColor(rgb: 0x0091ea),
+            UIColor(rgb: 0x00bfa5),
+            UIColor(rgb: 0x64dd17),
+            UIColor(rgb: 0xffd600)
         ]
     }
     
