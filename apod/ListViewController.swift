@@ -15,9 +15,8 @@ class ListViewController: UIViewController {
     
     var isFetching = true {
         didSet{
-            
             activityIndicator.isHidden = !isFetching
-            tableView.isHidden = isFetching
+            appendButton.isHidden = isFetching
         }
     }
     
@@ -27,10 +26,7 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
         
         nextButton.fill(background: .white, text: .label)
-//        appendButton.setImage(UIImage.init(named: "plus.circle"), for: .normal)
         
-        activityIndicator.isHidden = true
-
         // start fetch data
         let today = Date().start.addDays(-1)
         let oneWeekBefore = today.addDays(-5)
@@ -64,8 +60,8 @@ class ListViewController: UIViewController {
 // MARK: - Tableview data source and delegate
 extension ListViewController: UITableViewDelegate, UITableViewDataSource{
     
-    enum CellIdentifier: String{
-        case basicCell = "Cell"
+    enum CellIdentifier {
+        static let basicCell = "Cell"
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -77,7 +73,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.basicCell.rawValue, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.basicCell, for: indexPath)
         let dateLabel = cell.contentView.viewWithTag(100) as? UILabel
         let titleLabel = cell.contentView.viewWithTag(101) as? UILabel
         let image = cell.contentView.viewWithTag(102)
@@ -110,7 +106,6 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-
 extension ListViewController: DatePickerViewControllerDelegate{
     func dateSelected(from vc: UIViewController, on date: Date) {
 
@@ -125,10 +120,13 @@ extension ListViewController: DatePickerViewControllerDelegate{
             return
         }
         
+        isFetching = true
+        
         Apod.fetchApod(of: date) { [weak self] apod in
+            
             guard let self = self,
             let apod = apod else { return }
-            
+
             var apods = self.apods
             apods.append(apod)
             
@@ -137,6 +135,8 @@ extension ListViewController: DatePickerViewControllerDelegate{
             self.apods = apods
             
             self.tableView.reloadData()
+            
+            self.isFetching = false
         }
     }
 }
@@ -167,7 +167,7 @@ extension ListViewController {
     }
 }
 
-    
+// show date picker as popover style regardless of the device
 extension ListViewController: UIPopoverPresentationControllerDelegate{
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -175,7 +175,6 @@ extension ListViewController: UIPopoverPresentationControllerDelegate{
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        // iPhone에서도 popover를 보여준다.
         .none
     }
 }
