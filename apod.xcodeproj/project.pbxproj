@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2441D5BC2852FB510016A953 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2441D5BB2852FB510016A953 /* PhotoViewController.swift */; };
 		245FE73528516BEB00DA6F1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245FE73428516BEB00DA6F1D /* AppDelegate.swift */; };
 		245FE73728516BEB00DA6F1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245FE73628516BEB00DA6F1D /* SceneDelegate.swift */; };
 		245FE73928516BEB00DA6F1D /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245FE73828516BEB00DA6F1D /* ListViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2441D5BB2852FB510016A953 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		245FE73128516BEB00DA6F1D /* apod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = apod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		245FE73428516BEB00DA6F1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		245FE73628516BEB00DA6F1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				24F78F9A2851A80100B75160 /* SelectionViewController.swift */,
 				24EEDBF82852B00C0009B732 /* DatePickerViewController.swift */,
 				24EEDBFA2852D6910009B732 /* ChosenView.swift */,
+				2441D5BB2852FB510016A953 /* PhotoViewController.swift */,
 				245FE73A28516BEB00DA6F1D /* Main.storyboard */,
 				245FE73D28516BEE00DA6F1D /* Assets.xcassets */,
 				245FE73F28516BEE00DA6F1D /* LaunchScreen.storyboard */,
@@ -397,6 +400,7 @@
 				24F78F9D2851AD0400B75160 /* DecorationViews.swift in Sources */,
 				24F78F9728516F5700B75160 /* Extensions.swift in Sources */,
 				24EEDBFB2852D6910009B732 /* ChosenView.swift in Sources */,
+				2441D5BC2852FB510016A953 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

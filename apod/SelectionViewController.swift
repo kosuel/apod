@@ -74,11 +74,26 @@ class SelectionViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let cell = sender as? UICollectionViewCell,
+            let indexPath = self.collectionView.indexPath(for: cell) {
+
+            let apod = apods[indexPath.item]
+            
+            let vc = segue.destination as! PhotoViewController
+            vc.title = apod.title            
+            vc.imageUrl = apod.url
+        }
+    }
 }
 
 
 // MARK: - Button actions
 extension SelectionViewController {
+    @IBAction func unwindToSelectionViewAction(unwindSegue: UIStoryboardSegue){
+        // do nothing
+    }
 
 }
 
