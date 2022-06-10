@@ -7,6 +7,7 @@
 
 import UIKit
 
+// first scene
 class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextButton: UIButton!
@@ -44,11 +45,28 @@ class ListViewController: UIViewController {
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        if identifier == "showSelectionView" {
+            let selectedApods = apods.filter { $0.isSelected }
+            if selectedApods.count >= 3{
+                return true
+            }
+            else{
+                presentAlert(title: NSLocalizedString("Choose at least 3 items.", comment: ""), message: nil)
+                return false
+            }
+        }
+        else{
+            return true
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // send over apod data selection
-        if let _ = segue.destination as? SelectionViewController {
-            
+        if let vc = segue.destination as? SelectionViewController {
+            vc.apods = apods.filter { $0.isSelected }
         }
     }
     
@@ -80,10 +98,14 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource{
         
         let apod = apods[indexPath.section]
         
+        // set title
         dateLabel?.text = DateFormatter.localizedString(from: apod.date, dateStyle: .medium, timeStyle: .none)
         titleLabel?.text = apod.title
+        
+        // set selection icon
         image?.alpha = apod.isSelected ? 1.0 : 0.0
         
+        // set item color as random
         let colors = UIColor.cellColors
         let colorIndex = indexPath.section % colors.count
         
@@ -112,10 +134,7 @@ extension ListViewController: DatePickerViewControllerDelegate{
         // if there is a photo on the date, just return
         guard apods.contains(where:{ $0.date.isSameDate(to: date) }) == false else {
             
-            let alert = UIAlertController(title: NSLocalizedString("Photo already exists on date", comment: ""), message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
-            
-            present(alert, animated: true)
+            presentAlert(title: NSLocalizedString("Photo already exists on date.", comment: ""), message: nil)
             
             return
         }

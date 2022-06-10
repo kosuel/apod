@@ -17,6 +17,7 @@ class DecorationView:UIView {
     }
 }
 
+// top quarter circle design and title view
 class TitleView: DecorationView{
     
     override func draw(_ rect: CGRect) {
@@ -55,6 +56,7 @@ class TitleView: DecorationView{
     }
 }
 
+// bottom design of ListViewController(first scene)
 class LeftRoundBottomView: DecorationView{
     
     override func draw(_ rect: CGRect) {
@@ -77,7 +79,7 @@ class LeftRoundBottomView: DecorationView{
     }
 }
 
-
+// bottom design of SelectionViewController(second scene)
 class RightRoundBottomView: DecorationView{
     
     override func draw(_ rect: CGRect) {

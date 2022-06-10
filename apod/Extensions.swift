@@ -15,12 +15,13 @@ enum ApiKeys{
 extension UIColor {
     static var cellColors: [UIColor] {
         [
-            UIColor(rgb: 0x1a237e),
-            UIColor(rgb: 0x283593),
-            UIColor(rgb: 0x303f9f),
-            UIColor(rgb: 0x3949ab),
-            UIColor(rgb: 0x3f51b5),
-            UIColor(rgb: 0x5c6bc0)
+            UIColor(rgb: 0xd50000),
+            UIColor(rgb: 0xaa00ff),
+            UIColor(rgb: 0x304ffe),
+            UIColor(rgb: 0x0091ea),
+            UIColor(rgb: 0x00bfa5),
+            UIColor(rgb: 0x64dd17),
+            UIColor(rgb: 0xffd600)
         ]
     }
     
@@ -77,5 +78,14 @@ extension UIButton{
         else{
             self.layer.cornerRadius = 0;
         }
+    }
+}
+
+extension UIViewController {
+    func presentAlert(title:String?, message:String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default))
+        
+        present(alert, animated: true)
     }
 }
