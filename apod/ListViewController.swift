@@ -33,16 +33,19 @@ class ListViewController: UIViewController {
         let oneWeekBefore = today.addDays(-5)
 
         isFetching = true
-        Apod.fetchApods(from: oneWeekBefore, to: today) { [weak self] apods in
+        
+        Task.init { [weak self] in
             
             guard let self = self else { return}
+            
+            let apods = await Apod.fetchApods(from:oneWeekBefore, to:today)
             
             self.apods = apods ?? []
             
             self.tableView.reloadData()
             
             self.isFetching = false
-        }
+        }        
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -141,10 +144,14 @@ extension ListViewController: DatePickerViewControllerDelegate{
         
         isFetching = true
         
-        Apod.fetchApod(of: date) { [weak self] apod in
+        Task.init { [weak self] in
             
-            guard let self = self,
-            let apod = apod else { return }
+            guard let self = self else { return }
+            
+            guard let apod = await Apod.fetchApod(of: date) else {
+                self.isFetching = false
+                return
+            }
 
             var apods = self.apods
             apods.append(apod)
