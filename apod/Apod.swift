@@ -38,6 +38,15 @@ extension Apod {
         "https://api.nasa.gov/planetary/apod"
     }
     
+    static func fetchApod(of date:Date) async -> Apod? {
+        await withCheckedContinuation { continuation in
+            
+            fetchApod(of: date) { apod in
+                continuation.resume(returning: apod)
+            }
+        }
+    }
+    
     // completion hander will run on main thread
     //
     static func fetchApod(of date:Date, completion: @escaping (Apod?) -> ()) {
@@ -62,6 +71,15 @@ extension Apod {
         .resume()
     }
     
+    static func fetchApods(from fromDate: Date, to toDate: Date) async -> [Apod]? {
+        
+        await withCheckedContinuation { continuation in
+            fetchApods(from: fromDate, to: toDate) { apods in
+                continuation.resume(returning: apods)
+            }
+        }
+    }
+        
     static func fetchApods(from fromDate: Date, to toDate: Date, completion: @escaping ([Apod]?)->()){
         
         let dateFormatter = self.dateFormatter

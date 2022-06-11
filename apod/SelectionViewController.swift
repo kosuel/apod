@@ -63,11 +63,11 @@ class SelectionViewController: UIViewController {
                 self.chosen = animatingItem
                 
                 // final scale animation
-                UIView.animate(withDuration: 0.35) {
+                UIView.animate(withDuration: 0.25) {
                     self.chosenView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
 
                 } completion: { _ in
-                    UIView.animate(withDuration: 0.35) {
+                    UIView.animate(withDuration: 0.25) {
                         self.chosenView.transform = CGAffineTransform.identity
                     }
                 }
